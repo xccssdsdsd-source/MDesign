@@ -206,30 +206,38 @@ section{position:relative}
 .portfolio-heading h2{font-size:clamp(4.5rem,11.5vw,10.5rem);line-height:.78;letter-spacing:-.065em;color:#f3c8ce;margin-top:24px;text-shadow:0 24px 70px rgba(10,3,5,.38)}
 .portfolio-heading h2 em{display:block;font-weight:400}
 .portfolio-heading p{max-width:28ch;margin:34px 0 0 7px;color:rgba(246,239,228,.62);font-size:13px;letter-spacing:.13em;text-transform:uppercase}
-.portfolio-frame{position:relative;z-index:10;width:min(78vw,1180px);height:min(72svh,760px);margin-top:9vh;display:grid;place-items:center;perspective:1400px}
-.portfolio-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;will-change:transform,opacity;transform-origin:center}
+.portfolio-frame{position:relative;z-index:10;width:min(80vw,1180px);height:80svh;margin-top:4vh;display:grid;place-items:center;perspective:1400px}
+.portfolio-frame .portfolio-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;will-change:transform,opacity,filter;transform-origin:center}
 .portfolio-slide:first-child{opacity:1}
-.portfolio-slide img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 34px 52px rgba(8,3,4,.42));user-select:none}
-.portfolio-slide::after{content:"";position:absolute;inset:4% 1%;border:1px solid rgba(246,239,228,.09);pointer-events:none}
+.portfolio-slide img{width:100%;height:100%;object-fit:contain;border-radius:2px;filter:saturate(1.1) contrast(1.05) brightness(1.03) sepia(.05) drop-shadow(0 40px 60px rgba(8,3,4,.48));user-select:none}
 .portfolio-progress{position:absolute;z-index:40;right:clamp(24px,5vw,76px);bottom:clamp(28px,6vh,64px);display:flex;align-items:center;gap:16px;color:rgba(246,239,228,.58);font-size:11px;font-weight:600;letter-spacing:.2em}
 .portfolio-progress i{display:block;width:clamp(76px,10vw,150px);height:1px;background:rgba(246,239,228,.18);position:relative;overflow:hidden}
 .portfolio-progress i::after{content:"";position:absolute;inset:0;background:#f3c8ce;transform:scaleX(var(--portfolio-progress,0));transform-origin:left}
 .portfolio-count-current{color:#f3c8ce}
+.portfolio-dots{display:none}
 @media(max-width:760px){
-  .work,.portfolio-stage{min-height:600px}
-  .portfolio-heading{top:92px;left:22px}
+  .work,.portfolio-stage{min-height:auto;height:auto;overflow:visible;padding:96px 0 64px}
+  .portfolio-stage{display:block;padding-inline:0}
+  .portfolio-heading{position:relative;top:auto;left:auto;padding:0 22px;margin-bottom:36px}
   .portfolio-heading h2{font-size:clamp(4rem,21vw,6.5rem);margin-top:18px}
   .portfolio-heading p{font-size:10px;margin-top:24px;max-width:24ch}
-  .portfolio-frame{width:90vw;height:62svh;margin-top:16vh}
-  .portfolio-progress{right:22px;bottom:24px}
+  .portfolio-frame{width:100%;height:62svh;margin-top:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:0 8vw;gap:16px}
+  .portfolio-frame::-webkit-scrollbar{display:none}
+  .portfolio-frame .portfolio-slide{position:relative;inset:auto;flex:0 0 84vw;height:100%;scroll-snap-align:center;opacity:1!important;transform:none!important;filter:none!important}
+  .portfolio-slide img{filter:saturate(1.1) contrast(1.05) brightness(1.03) sepia(.05) drop-shadow(0 20px 30px rgba(8,3,4,.4))!important}
+  .portfolio-progress{display:none}
+  .portfolio-dots{display:flex;justify-content:center;gap:9px;margin-top:26px}
+  .portfolio-dots i{width:6px;height:6px;border-radius:50%;background:rgba(246,239,228,.28);transition:background .3s var(--ease-out),transform .3s var(--ease-out)}
+  .portfolio-dots i.active{background:#f3c8ce;transform:scale(1.35)}
 }
 @media(prefers-reduced-motion:reduce){
   .work{height:auto;overflow:visible;padding:100px 0}
   .portfolio-stage{height:auto;display:block;overflow:visible;padding-inline:22px}
   .portfolio-heading{position:relative;top:auto;left:auto;margin-bottom:64px}
   .portfolio-frame{width:100%;height:auto;margin:0;display:grid;gap:52px}
-  .portfolio-slide{position:relative;inset:auto;height:min(70svh,720px);opacity:1!important;transform:none!important}
+  .portfolio-frame .portfolio-slide{position:relative;inset:auto;height:min(70svh,720px);opacity:1!important;transform:none!important}
   .portfolio-progress{display:none}
+  .portfolio-dots{display:none!important}
 }
 
 /* CENNIK */
@@ -300,7 +308,8 @@ section{position:relative}
 .cal-grid span{font-size:12px;min-height:36px;display:grid;place-items:center}
 .cal-grid .day{color:var(--taupe);font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .cal-grid .open{border:1px solid rgba(92,24,38,.28);color:var(--bordo);background:rgba(92,24,38,.04);font-weight:700}
-.instagram-edge{position:fixed;z-index:90;right:0;top:50%;display:flex;align-items:center;gap:10px;padding:13px 11px;background:rgba(35,19,25,.9);backdrop-filter:blur(12px);color:var(--ecru);writing-mode:vertical-rl;transform:translateY(-50%);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(246,239,228,.13);border-right:0;transition:background .2s var(--ease-out),padding .2s var(--ease-out)}
+.instagram-edge{position:fixed;z-index:90;right:0;top:50%;display:flex;align-items:center;gap:10px;padding:13px 11px;background:rgba(35,19,25,.9);backdrop-filter:blur(12px);color:var(--ecru);writing-mode:vertical-rl;transform:translateY(-50%);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(246,239,228,.13);border-right:0;transition:background .2s var(--ease-out),padding .2s var(--ease-out),opacity .5s var(--ease-out)}
+body.in-work .nav,body.in-work .instagram-edge{opacity:0!important;pointer-events:none!important}
 .instagram-edge:hover{background:var(--bordo);padding-right:14px}
 .instagram-edge svg{width:15px;height:15px;fill:currentColor}
 @media(max-width:760px){.instagram-edge{display:none}.cal-grid{gap:4px}.cal-grid span{min-height:32px}}
@@ -467,8 +476,9 @@ section{position:relative}
     <div class="portfolio-progress" aria-hidden="true">
       <span class="portfolio-count-current" id="portfolioCurrent">01</span>
       <i></i>
-      <span>14</span>
+      <span>08</span>
     </div>
+    <div class="portfolio-dots" id="portfolioDots" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -588,20 +598,14 @@ section{position:relative}
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 const gallery=[
-  {src:'assets/img/realizacje/lazienka-zloty-marmur.jpg',t:'Łazienka w złotym marmurze',c:'Łazienka'},
-  {src:'assets/img/realizacje/lazienka-detal.jpg',t:'Detal łazienki',c:'Łazienka'},
-  {src:'assets/img/realizacje/salon-studio.jpg',t:'Kompaktowe studio',c:'Salon'},
-  {src:'assets/img/realizacje/salon-marmur.jpg',t:'Salon z marmurową ścianą',c:'Salon'},
-  {src:'assets/img/realizacje/salon-boucle.jpg',t:'Ciepły salon w bouclé',c:'Salon'},
-  {src:'assets/img/realizacje/sypialnia-lawenda.jpg',t:'Sypialnia w odcieniach lawendy',c:'Sypialnia'},
-  {src:'assets/img/realizacje/sypialnia-kremowa.jpg',t:'Kremowa sypialnia',c:'Sypialnia'},
-  {src:'assets/img/realizacje/lazienka-czarno-zlota.jpg',t:'Łazienka — czerń i złoto',c:'Łazienka'},
-  {src:'assets/img/realizacje/salon-glam.jpg',t:'Salon glamour',c:'Salon'},
-  {src:'assets/img/realizacje/salon-kominek.jpg',t:'Salon z biokominkiem',c:'Salon'},
-  {src:'assets/img/realizacje/kuchnia-ciemna.jpg',t:'Ciemna kuchnia z kamieniem',c:'Kuchnia'},
-  {src:'assets/img/realizacje/lazienka-zielone-kafle.jpg',t:'Łazienka w zielonych kaflach',c:'Łazienka'},
-  {src:'assets/img/realizacje/lazienka-ciemna-zielen.jpg',t:'Łazienka w ciemnej zieleni',c:'Łazienka'},
-  {src:'assets/img/realizacje/lazienka-moody.jpg',t:'Nastrojowa łazienka',c:'Łazienka'}
+  {src:'images/JPG/ImageDownloader_www.instagram.com_730420921_18133127311528591_2638278918622765004_n.jpg',t:'Łazienka w czerni i złocie z akcentem marmuru',c:'Łazienka'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_732637294_18134780509528591_6324963513353653973_n.jpg',t:'Salon i strefa jadalna w eleganckim, klasycznym stylu',c:'Salon'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_733396159_2527879474400346_7672054107011399157_n.jpg',t:'Nastrojowa łazienka z podświetlanym lustrem',c:'Łazienka'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_741365786_18136114501528591_5039268534502441313_n.jpg',t:'Toaletka w ciepłej, marmurowej scenerii',c:'Łazienka'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_746660760_18138157135528591_549132693000254657_n.jpg',t:'Sypialnia w stonowanej, lawendowej tonacji',c:'Sypialnia'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_748939268_18138867136528591_4246544911266697741_n.jpg',t:'Łazienka w głębokiej zieleni z organicznym lustrem',c:'Łazienka'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_750311927_18138715591528591_276443644214509255_n.jpg',t:'Łazienka w ciemnym, spa-like klimacie',c:'Łazienka'},
+  {src:'images/JPG/ImageDownloader_www.instagram.com_750586095_18138715555528591_1487929776061740169_n.jpg',t:'Łazienka w bordowym marmurze ze złotymi dodatkami',c:'Łazienka'}
 ]
 const attach=img=>{img.addEventListener('error',()=>img.closest('.imgslot').classList.add('err'))}
 
@@ -666,35 +670,31 @@ if(!reduce){
   if(!isMobile){
     gsap.to('.hero-bg img',{yPercent:12,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}})
   }
+}
 
+/* REALIZACJE: immersywne przejście na desktopie, swipe-carousel na mobile */
+if(!reduce && !isMobile){
   const portfolioSlides=gsap.utils.toArray('.portfolio-slide')
   const portfolioCurrent=document.getElementById('portfolioCurrent')
   const portfolioProgress=document.querySelector('.portfolio-progress')
   const entries=[
-    {xPercent:0,yPercent:76,rotation:-1.2,scale:.42},
-    {xPercent:-122,yPercent:8,rotation:-3.2,scale:.76},
-    {xPercent:120,yPercent:-5,rotation:2.8,scale:.78},
-    {xPercent:0,yPercent:-118,rotation:1.6,scale:.68},
-    {xPercent:0,yPercent:120,rotation:-1.8,scale:.7},
-    {xPercent:-112,yPercent:-38,rotation:-3.4,scale:.74},
-    {xPercent:114,yPercent:36,rotation:3.2,scale:.76},
-    {xPercent:-118,yPercent:0,rotation:-2.4,scale:.82},
-    {xPercent:0,yPercent:-120,rotation:1.2,scale:.72},
-    {xPercent:120,yPercent:0,rotation:2.6,scale:.78},
-    {xPercent:0,yPercent:120,rotation:-1.4,scale:.68},
-    {xPercent:-108,yPercent:32,rotation:-3,scale:.74},
-    {xPercent:112,yPercent:-34,rotation:3.4,scale:.72},
-    {xPercent:0,yPercent:-116,rotation:0,scale:.58}
+    {rotation:-2.2,scale:.5,blur:11},
+    {rotation:2.8,scale:.62,blur:10},
+    {rotation:-3.1,scale:.58,blur:11},
+    {rotation:1.9,scale:.66,blur:9},
+    {rotation:-1.8,scale:.6,blur:10},
+    {rotation:2.4,scale:.64,blur:9},
+    {rotation:-2.6,scale:.56,blur:11},
+    {rotation:1.6,scale:.6,blur:10}
   ]
   const portfolioTl=gsap.timeline()
   gsap.set(portfolioSlides,{autoAlpha:0})
   portfolioSlides.forEach((slide,i)=>{
-    const entry=entries[i]
-    const zoomsForward=i%3===1
-    portfolioTl.fromTo(slide,{...entry,autoAlpha:i===0?.74:0},{xPercent:0,yPercent:0,rotation:0,scale:1,autoAlpha:1,duration:i===0?.58:.46,ease:'power3.out'},Math.max(0,i-.08))
+    const entry=entries[i%entries.length]
+    portfolioTl.fromTo(slide,{scale:entry.scale,rotation:entry.rotation,autoAlpha:i===0?.74:0,filter:`blur(${entry.blur}px)`},{scale:1,rotation:0,autoAlpha:1,filter:'blur(0px)',duration:i===0?.58:.5,ease:'power3.out'},Math.max(0,i-.08))
     portfolioTl.addLabel(`realizacja-${i+1}`,i+.36)
     if(i<portfolioSlides.length-1){
-      portfolioTl.to(slide,{xPercent:-entry.xPercent*.42,yPercent:-entry.yPercent*.36,rotation:-entry.rotation*.55,scale:zoomsForward?1.28:.66,autoAlpha:0,duration:.42,ease:'power2.inOut'},i+.68)
+      portfolioTl.to(slide,{scale:entry.scale*.92,rotation:-entry.rotation*.6,autoAlpha:0,filter:`blur(${entry.blur}px)`,duration:.46,ease:'power2.inOut'},i+.68)
     }
   })
   portfolioTl.addLabel('koniec',portfolioSlides.length-.18)
@@ -710,13 +710,39 @@ if(!reduce){
     scrub:.72,
     anticipatePin:1,
     invalidateOnRefresh:true,
-    snap:isMobile?false:{snapTo:'labelsDirectional',duration:{min:.16,max:.38},delay:.06,ease:'power2.inOut'},
+    snap:{snapTo:'labelsDirectional',duration:{min:.16,max:.38},delay:.06,ease:'power2.inOut'},
+    onEnter:()=>document.body.classList.add('in-work'),
+    onEnterBack:()=>document.body.classList.add('in-work'),
+    onLeave:()=>document.body.classList.remove('in-work'),
+    onLeaveBack:()=>document.body.classList.remove('in-work'),
     onUpdate:self=>{
       const current=Math.min(portfolioSlides.length-1,Math.max(0,Math.round(self.progress*(portfolioSlides.length-1))))
       portfolioCurrent.textContent=String(current+1).padStart(2,'0')
       portfolioProgress.style.setProperty('--portfolio-progress',self.progress)
     }
   })
+}else if(!reduce && isMobile){
+  const frame=portfolioFrame
+  const slides=[...frame.children]
+  const dotsWrap=document.getElementById('portfolioDots')
+  dotsWrap.innerHTML=slides.map((_,i)=>`<i class="${i===0?'active':''}"></i>`).join('')
+  const dots=[...dotsWrap.children]
+  const updateActive=()=>{
+    const step=slides[0].getBoundingClientRect().width+16
+    const idx=Math.min(slides.length-1,Math.max(0,Math.round(frame.scrollLeft/step)))
+    dots.forEach((d,i)=>d.classList.toggle('active',i===idx))
+  }
+  let scrollT
+  frame.addEventListener('scroll',()=>{clearTimeout(scrollT);scrollT=setTimeout(updateActive,60)},{passive:true})
+  const workIo=new IntersectionObserver(entries=>{
+    entries.forEach(e=>document.body.classList.toggle('in-work',e.isIntersecting))
+  },{threshold:.35})
+  workIo.observe(document.querySelector('.work'))
+}else{
+  const workIo=new IntersectionObserver(entries=>{
+    entries.forEach(e=>document.body.classList.toggle('in-work',e.isIntersecting))
+  },{threshold:.4})
+  workIo.observe(document.querySelector('.work'))
 }
 
 const loader=document.getElementById('pageLoader')
