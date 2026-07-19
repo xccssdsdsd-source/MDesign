@@ -142,6 +142,10 @@ section{position:relative}
 .frame-fallback .ln{width:44px;height:1px;background:var(--taupe)}
 .frame-fallback small{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase}
 .about-frame .stamp{position:absolute;bottom:-28px;left:-28px;width:118px;height:118px;border-radius:50%;background:var(--bordo);color:var(--ecru);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-family:'Bodoni Moda';font-style:italic;line-height:1.2;box-shadow:var(--shadow-lg);z-index:3}
+.about-frame .stamp::before{content:"";position:absolute;inset:-9px;border:1px dashed rgba(92,24,38,.4);border-radius:50%;animation:stampSpin 34s linear infinite}
+.about-frame .stamp::after{content:"";position:absolute;inset:-9px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(246,239,228,.15)}
+@keyframes stampSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.about-frame .stamp::before{animation:none}}
 .about-frame .stamp b{font-size:26px;font-style:normal;font-weight:600}
 .about-frame .stamp span{font-family:'Urbanist';font-style:normal;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.8;margin-top:2px}
 .about-body h2{font-size:clamp(2rem,4.4vw,3.3rem);margin:16px 0 0}
@@ -210,6 +214,10 @@ section{position:relative}
 .portfolio-frame .portfolio-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;will-change:transform,opacity,filter;transform-origin:center}
 .portfolio-slide:first-child{opacity:1}
 .portfolio-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;border-radius:2px;filter:saturate(1.1) contrast(1.05) brightness(1.03) sepia(.05) drop-shadow(0 40px 60px rgba(8,3,4,.48));user-select:none}
+.portfolio-cap{position:absolute;left:clamp(14px,2.4vw,30px);bottom:clamp(14px,2.4vh,30px);z-index:5;display:flex;align-items:center;gap:12px;color:var(--ecru);pointer-events:none}
+.portfolio-cap i{width:22px;height:1px;background:#f3c8ce;opacity:.7}
+.portfolio-cap b{font-family:'Bodoni Moda';font-style:italic;font-size:clamp(15px,1.6vw,19px);font-weight:500;text-shadow:0 4px 18px rgba(8,3,4,.55)}
+.portfolio-cap span{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(246,239,228,.6);font-weight:600;margin-left:2px}
 .portfolio-progress{position:absolute;z-index:40;right:clamp(24px,5vw,76px);bottom:clamp(28px,6vh,64px);display:flex;align-items:center;gap:16px;color:rgba(246,239,228,.58);font-size:11px;font-weight:600;letter-spacing:.2em}
 .portfolio-progress i{display:block;width:clamp(76px,10vw,150px);height:1px;background:rgba(246,239,228,.18);position:relative;overflow:hidden}
 .portfolio-progress i::after{content:"";position:absolute;inset:0;background:#f3c8ce;transform:scaleX(var(--portfolio-progress,0));transform-origin:left}
@@ -610,7 +618,7 @@ const gallery=[
 const attach=img=>{img.addEventListener('error',()=>img.closest('.imgslot').classList.add('err'))}
 
 const portfolioFrame=document.getElementById('portfolioFrame')
-portfolioFrame.innerHTML=gallery.map((g,i)=>`<figure class="portfolio-slide imgslot" data-label="${g.c}"><img ${i<2?'loading="eager" fetchpriority="high"':'loading="lazy"'} decoding="async" src="${g.src}" alt="${g.t} — realizacja MDesign"></figure>`).join('')
+portfolioFrame.innerHTML=gallery.map((g,i)=>`<figure class="portfolio-slide imgslot" data-label="${g.c}"><img ${i<2?'loading="eager" fetchpriority="high"':'loading="lazy"'} decoding="async" src="${g.src}" alt="${g.t} — realizacja MDesign"><figcaption class="portfolio-cap"><i></i><span>${String(i+1).padStart(2,'0')}</span><b>${g.c}</b></figcaption></figure>`).join('')
 
 document.querySelectorAll('.imgslot img').forEach(attach)
 
